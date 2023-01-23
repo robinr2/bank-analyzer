@@ -1,14 +1,14 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import FileInput from './FileInput'
-import FileSubmitButton from './FileSubmitButton'
+import FileUploadInput from './FileUploadInput'
+import FileUploadSubmitButton from './FileUploadSubmitButton'
 
-type FileFormProps = {
+type FileUploadFormProps = {
   file: File | null
   onFileChange: (file: File | null) => void
 }
 
-function FileForm({ file, onFileChange }: FileFormProps) {
+function FileUploadForm({ file, onFileChange }: FileUploadFormProps) {
   const isFileSelected = file !== null
   const navigate = useNavigate()
 
@@ -25,10 +25,10 @@ function FileForm({ file, onFileChange }: FileFormProps) {
 
   return (
     <form onSubmit={handleFileSubmit}>
-      <FileInput onFileChange={onFileChange} isFileSelected={isFileSelected} />
-      <FileSubmitButton isFileSelected={isFileSelected} />
+      <FileUploadInput onFileChange={onFileChange} isFileSelected={isFileSelected} />
+      <FileUploadSubmitButton isFileSelected={isFileSelected} />
     </form>
   )
 }
 
-export default FileForm
+export default FileUploadForm

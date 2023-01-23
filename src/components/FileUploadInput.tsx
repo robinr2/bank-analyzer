@@ -1,11 +1,11 @@
 import React from 'react'
 
-type FileInputProps = {
+type FileUploadInputProps = {
   onFileChange: (file: File | null) => void
   isFileSelected: boolean
 }
 
-function FileInput({ onFileChange, isFileSelected }: FileInputProps) {
+function FileUploadInput({ onFileChange, isFileSelected }: FileUploadInputProps) {
   const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files !== null && e.target.files.length > 0) {
       onFileChange(e.target.files[0])
@@ -30,4 +30,4 @@ function FileInput({ onFileChange, isFileSelected }: FileInputProps) {
   )
 }
 
-export default FileInput
+export default FileUploadInput

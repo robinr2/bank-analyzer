@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import FileForm from '../components/FileForm'
+import FileUploadForm from '../components/FileUploadForm'
 
 type FileUploadProps = {
   file: File | null
@@ -17,7 +17,7 @@ function FileUpload(props: FileUploadProps) {
     <>
       <h1>Bank Analyzer</h1>
       <article>
-        <FileForm {...props} />
+        <FileUploadForm {...props} />
       </article>
     </>
   )
