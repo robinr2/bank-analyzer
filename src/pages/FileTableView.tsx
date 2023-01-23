@@ -1,11 +1,11 @@
-import { useLocation } from 'react-router-dom'
+type FileTableViewProps = {
+  file: File | null
+}
 
-function FileTableView() {
-  // TODO: Type this.
-  // put the file as state into the app and drill it to components
-  const { state } = useLocation()
+// TODO: Redirect to '/' if file is null
 
-  return <h1>{state.name}</h1>
+function FileTableView({ file }: FileTableViewProps) {
+  return <h1>{file !== null ? file.name : 'No file found.'}</h1>
 }
 
 export default FileTableView

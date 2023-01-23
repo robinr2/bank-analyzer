@@ -1,18 +1,23 @@
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import FileForm from '../components/FileForm'
 
-function FileUpload() {
-  const navigate = useNavigate()
+type FileUploadProps = {
+  file: File | null
+  onFileChange: (file: File | null) => void
+}
 
-  const onFileSubmit = (file: File) => {
-    navigate('/view', { state: { name: file.name } })
-  }
+function FileUpload(props: FileUploadProps) {
+  const { onFileChange } = props
+
+  useEffect(() => {
+    onFileChange(null)
+  }, [])
 
   return (
     <>
       <h1>Bank Analyzer</h1>
       <article>
-        <FileForm onFileSubmit={onFileSubmit} />
+        <FileForm {...props} />
       </article>
     </>
   )
