@@ -1,10 +1,12 @@
+import { Navigate } from 'react-router-dom'
+
 type FileTableViewProps = {
   file: File | null
 }
 
-// TODO: Redirect to '/' if file is null
-
 function FileTableView({ file }: FileTableViewProps) {
+  if (file === null) return <Navigate to="/" replace />
+
   return <h1>{file !== null ? file.name : 'No file found.'}</h1>
 }
 
