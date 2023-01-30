@@ -8,11 +8,33 @@ type FileTableViewProps = {
 function FileTableView({ file }: FileTableViewProps) {
   if (file === null) return <Navigate to="/" replace />
 
-  const { headers, rows, error, isLoading } = useParseCSV(file)
+  const { headers, rows, isLoading, error } = useParseCSV(file)
 
   if (isLoading) return <h1>Loading...</h1>
 
-  return <h1>{file.name}</h1>
+  return (
+    <>
+      <h1>{file.name}</h1>
+      <table role="grid">
+        <thead>
+          <tr>
+            {headers.map((header, headerIndex) => (
+              <th key={`header-${headerIndex}`}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, rowIndex) => (
+            <tr key={`row-${rowIndex}`}>
+              {Object.values(row).map((value, valueIndex) => (
+                <td key={`value-${valueIndex}`}>{value}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
 }
 
 export default FileTableView
