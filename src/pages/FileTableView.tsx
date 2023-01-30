@@ -9,6 +9,24 @@ type Row = {
   [key: string]: string
 }
 
+const HEADERS = {
+  RECIPIENT: 'recipient',
+  AMOUNT: 'amount',
+  DATE: 'date',
+  ID: 'id',
+} as const
+
+type HeaderTranslation = {
+  [key: string]: string
+}
+
+const headerTranslation: HeaderTranslation = {
+  'Beguenstigter/Zahlungspflichtiger': HEADERS.RECIPIENT,
+  Betrag: HEADERS.AMOUNT,
+  Buchungstag: HEADERS.DATE,
+  'Kontonummer/IBAN': HEADERS.ID,
+}
+
 function FileTableView({ file }: FileTableViewProps) {
   if (file === null) return <Navigate to="/" replace />
 
@@ -27,12 +45,14 @@ function FileTableView({ file }: FileTableViewProps) {
       }
 
       const data = fileReader.result.split(/\r?\n/).map((row) => row.replace(/\"/g, '').split(';'))
-      const headers = data[0]
+      const headers = data[0].map((header) => headerTranslation[header] ?? null)
       const rows: Row[] = []
       for (let i = 1; i < data.length; i++) {
         const row: Row = {}
         for (let j = 0; j < headers.length; j++) {
-          row[data[0][j]] = data[i][j]
+          if (headers[j] !== null) {
+            row[headers[j]] = data[i][j]
+          }
         }
         rows.push(row)
       }
