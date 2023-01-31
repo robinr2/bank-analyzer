@@ -10,7 +10,7 @@ function FileTableView({ file }: FileTableViewProps) {
 
   const { headers, rows, isLoading, error } = useParseCSV(file)
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <progress></progress>
 
   return (
     <>
