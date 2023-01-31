@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom'
+import FilePreviewForm from '../components/FilePreviewForm'
 import FilePreviewTable from '../components/FilePreviewTable'
 import { useParseCSV } from '../hooks/useParseCSV'
 
@@ -17,6 +18,7 @@ function FilePreview({ file }: FilePreviewProps) {
   return (
     <>
       <h1>{file.name}</h1>
+      <FilePreviewForm />
       <FilePreviewTable headers={headers} rows={rows} />
     </>
   )
