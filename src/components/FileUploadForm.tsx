@@ -4,12 +4,11 @@ import FileUploadInput from './FileUploadInput'
 import FileUploadSubmitButton from './FileUploadSubmitButton'
 
 type FileUploadFormProps = {
-  file: File | null
+  isFileSelected: boolean
   onFileChange: (file: File | null) => void
 }
 
-function FileUploadForm({ file, onFileChange }: FileUploadFormProps) {
-  const isFileSelected = file !== null
+function FileUploadForm({ isFileSelected, onFileChange }: FileUploadFormProps) {
   const navigate = useNavigate()
 
   const handleFileSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {

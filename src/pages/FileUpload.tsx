@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import FileUploadForm from '../components/FileUploadForm'
 
 type FileUploadProps = {
-  file: File | null
+  isFileSelected: boolean
   onFileChange: (file: File | null) => void
 }
 
