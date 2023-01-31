@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-type Row = {
+export type Row = {
   [key: string]: string
 }
 

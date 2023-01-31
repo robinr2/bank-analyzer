@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import FileTableView from './pages/FileTableView'
+import FilePreview from './pages/FilePreview'
 import FileUpload from './pages/FileUpload'
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <main className="container">
       <Routes>
         <Route path="/" element={<FileUpload file={file} onFileChange={setFile} />} />
-        <Route path="view" element={<FileTableView file={file} />} />
+        <Route path="preview" element={<FilePreview file={file} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </main>

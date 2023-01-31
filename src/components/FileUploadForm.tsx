@@ -20,7 +20,7 @@ function FileUploadForm({ file, onFileChange }: FileUploadFormProps) {
       return
     }
 
-    navigate('/view')
+    navigate('/preview')
   }
 
   return (
