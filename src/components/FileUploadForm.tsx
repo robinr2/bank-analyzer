@@ -1,6 +1,6 @@
 import { FormEventHandler, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useCSVContext } from '../context/CSVContext'
+import { useCSVDataContext } from '../context/CSVDataContext'
 import { parseCSV } from '../utils/parseCSV'
 import FileUploadInput from './FileUploadInput'
 import FileUploadSubmitButton from './FileUploadSubmitButton'
@@ -8,7 +8,7 @@ import FileUploadSubmitButton from './FileUploadSubmitButton'
 function FileUploadForm() {
   const [file, setFile] = useState<File | null>(null)
   const isFileSelected = file !== null
-  const { setHeaders, setRows } = useCSVContext()
+  const { setHeaders, setRows } = useCSVDataContext()
 
   const navigate = useNavigate()
 

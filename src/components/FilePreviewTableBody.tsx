@@ -1,7 +1,7 @@
-import { useCSVContext } from '../context/CSVContext'
+import { useCSVDataContext } from '../context/CSVDataContext'
 
 function FilePreviewTableBody() {
-  const { rows } = useCSVContext()
+  const { rows } = useCSVDataContext()
 
   return (
     <tbody>

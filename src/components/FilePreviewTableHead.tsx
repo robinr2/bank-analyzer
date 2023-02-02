@@ -1,7 +1,7 @@
-import { useCSVContext } from '../context/CSVContext'
+import { useCSVDataContext } from '../context/CSVDataContext'
 
 function FilePreviewTableHead() {
-  const { headers } = useCSVContext()
+  const { headers } = useCSVDataContext()
 
   return (
     <thead>

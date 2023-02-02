@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useCSVContext } from '../context/CSVContext'
+import { useCSVDataContext } from '../context/CSVDataContext'
 
 function RequireCSVData() {
-  const { headers, rows } = useCSVContext()
+  const { headers, rows } = useCSVDataContext()
 
   return headers.length && rows.length ? <Outlet /> : <Navigate to="/" />
 }
