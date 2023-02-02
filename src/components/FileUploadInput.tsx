@@ -1,4 +1,4 @@
-import React from 'react'
+import { ChangeEventHandler } from 'react'
 
 type FileUploadInputProps = {
   onFileChange: (file: File | null) => void
@@ -6,7 +6,7 @@ type FileUploadInputProps = {
 }
 
 function FileUploadInput({ onFileChange, isFileSelected }: FileUploadInputProps) {
-  const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleFileChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files !== null && e.target.files.length > 0) {
       onFileChange(e.target.files[0])
       return

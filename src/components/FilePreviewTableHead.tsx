@@ -1,8 +1,8 @@
-type FilePreviewTableHeadProps = {
-  headers: string[]
-}
+import { useCSVContext } from '../context/CSVContext'
 
-function FilePreviewTableHead({ headers }: FilePreviewTableHeadProps) {
+function FilePreviewTableHead() {
+  const { headers } = useCSVContext()
+
   return (
     <thead>
       <tr>

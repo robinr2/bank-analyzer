@@ -1,10 +1,8 @@
-import { Row } from '../utils/parseCSV'
+import { useCSVContext } from '../context/CSVContext'
 
-type FilePreviewTableBodyProps = {
-  rows: Row[]
-}
+function FilePreviewTableBody() {
+  const { rows } = useCSVContext()
 
-function FilePreviewTableBody({ rows }: FilePreviewTableBodyProps) {
   return (
     <tbody>
       {rows.map((row, rowIndex) => (

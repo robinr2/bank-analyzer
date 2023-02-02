@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { FormEventHandler, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Row } from '../utils/parseCSV'
+import { useCSVContext } from '../context/CSVContext'
 import { parseCSV } from '../utils/parseCSV'
 import FileUploadInput from './FileUploadInput'
 import FileUploadSubmitButton from './FileUploadSubmitButton'
 
-// TODO: To reduce type duplication, headers and rows should be in context
-type FileUploadFormProps = {
-  onFileSubmit: (headers: string[], rows: Row[]) => void
-}
-
-function FileUploadForm({ onFileSubmit }: FileUploadFormProps) {
+function FileUploadForm() {
   const [file, setFile] = useState<File | null>(null)
   const isFileSelected = file !== null
+  const { setHeaders, setRows } = useCSVContext()
 
   const navigate = useNavigate()
 
-  const handleFileSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+  const handleFileSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault()
 
     if (!isFileSelected) {
@@ -26,7 +22,9 @@ function FileUploadForm({ onFileSubmit }: FileUploadFormProps) {
 
     try {
       const { headers, rows } = await parseCSV(file)
-      onFileSubmit(headers, rows)
+      setHeaders(headers)
+      setRows(rows)
+
       navigate('/preview')
     } catch (error) {
       console.error(error)

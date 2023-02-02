@@ -1,9 +1,10 @@
+import { FormEventHandler } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function FilePreviewForm() {
   const navigate = useNavigate()
 
-  const handlePreviewSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handlePreviewSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
 
     navigate('/analysis')

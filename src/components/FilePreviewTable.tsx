@@ -1,17 +1,11 @@
-import { Row } from '../utils/parseCSV'
 import FilePreviewTableBody from './FilePreviewTableBody'
 import FilePreviewTableHead from './FilePreviewTableHead'
 
-type FilePreviewTableProps = {
-  headers: string[]
-  rows: Row[]
-}
-
-function FilePreviewTable({ headers, rows }: FilePreviewTableProps) {
+function FilePreviewTable() {
   return (
     <table role="grid">
-      <FilePreviewTableHead headers={headers} />
-      <FilePreviewTableBody rows={rows} />
+      <FilePreviewTableHead />
+      <FilePreviewTableBody />
     </table>
   )
 }
