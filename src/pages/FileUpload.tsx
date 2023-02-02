@@ -1,18 +1,11 @@
-import { useEffect } from 'react'
 import FileUploadForm from '../components/FileUploadForm'
+import { Row } from '../utils/parseCSV'
 
 type FileUploadProps = {
-  isFileSelected: boolean
-  onFileChange: (file: File | null) => void
+  onFileSubmit: (headers: string[], rows: Row[]) => void
 }
 
 function FileUpload(props: FileUploadProps) {
-  const { onFileChange } = props
-
-  useEffect(() => {
-    onFileChange(null)
-  }, [])
-
   return (
     <>
       <h1>Bank Analyzer</h1>

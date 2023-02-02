@@ -1,4 +1,4 @@
-import { Row } from '../hooks/useParseCSV'
+import { Row } from '../utils/parseCSV'
 
 type FilePreviewTableBodyProps = {
   rows: Row[]

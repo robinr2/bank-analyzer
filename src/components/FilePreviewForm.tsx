@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 function FilePreviewForm() {
   const navigate = useNavigate()
 
-  const handlePreviewSubmit: React.FormEventHandler = (e) => {
+  const handlePreviewSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
 
     navigate('/analysis')
