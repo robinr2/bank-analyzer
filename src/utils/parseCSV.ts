@@ -1,8 +1,8 @@
-export type Row = {
+export type RowType = {
   [key: string]: string
 }
 
-type HeaderTranslation = {
+type HeaderTranslationType = {
   [key: string]: string
 }
 
@@ -13,7 +13,7 @@ const HEADERS = {
   ID: 'id',
 } as const
 
-const headerTranslation: HeaderTranslation = {
+const headerTranslation: HeaderTranslationType = {
   'Beguenstigter/Zahlungspflichtiger': HEADERS.RECIPIENT,
   Betrag: HEADERS.AMOUNT,
   Buchungstag: HEADERS.DATE,
@@ -24,9 +24,9 @@ export const parseCSV = async (file: File) => {
   const csvString = await file.text()
   const data = csvString.split(/\r?\n/).map((row) => row.replace(/\"/g, '').split(';'))
   const translatedHeaders = data[0].map((header) => headerTranslation[header] ?? null)
-  const mappedRows: Row[] = []
+  const mappedRows: RowType[] = []
   for (let i = 1; i < data.length; i++) {
-    const row: Row = {}
+    const row: RowType = {}
     for (let j = 0; j < translatedHeaders.length; j++) {
       if (translatedHeaders[j] !== null) {
         row[translatedHeaders[j]] = data[i][j]
