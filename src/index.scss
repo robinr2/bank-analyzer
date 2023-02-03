@@ -1,2 +1,11 @@
 $semantic-root-element: '#root';
+
+.income {
+  background-color: #43a047;
+}
+
+.expenses {
+  background-color: #e53935;
+}
+
 @import '@picocss/pico/scss/pico';
