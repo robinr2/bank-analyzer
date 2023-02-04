@@ -1,42 +1,39 @@
-export type RowType = {
-  [key: string]: string
+type HeaderTranslationsType = 'recipient' | 'amount' | 'date' | 'id'
+
+export type RowType = Record<HeaderTranslationsType, string>
+
+const headerTranslations: Record<string, HeaderTranslationsType> = {
+  'Beguenstigter/Zahlungspflichtiger': 'recipient',
+  Betrag: 'amount',
+  Buchungstag: 'date',
+  'Kontonummer/IBAN': 'id',
 }
 
-type HeaderTranslationType = {
-  [key: string]: string
-}
-
-const HEADERS = {
-  RECIPIENT: 'recipient',
-  AMOUNT: 'amount',
-  DATE: 'date',
-  ID: 'id',
-} as const
-
-const headerTranslation: HeaderTranslationType = {
-  'Beguenstigter/Zahlungspflichtiger': HEADERS.RECIPIENT,
-  Betrag: HEADERS.AMOUNT,
-  Buchungstag: HEADERS.DATE,
-  'Kontonummer/IBAN': HEADERS.ID,
+const getDataFromCSVString = (csvString: string) => {
+  return csvString.split(/\r?\n/).map((row) => row.replace(/\"/g, '').split(';'))
 }
 
 export const parseCSV = async (file: File) => {
   const csvString = await file.text()
-  const data = csvString.split(/\r?\n/).map((row) => row.replace(/\"/g, '').split(';'))
-  const translatedHeaders = data[0].map((header) => headerTranslation[header] ?? null)
-  const mappedRows: RowType[] = []
+  const data = getDataFromCSVString(csvString)
+  const headers = data[0].reduce((acc: string[], header) => {
+    return headerTranslations[header] ? [headerTranslations[header], ...acc] : acc
+  }, [])
+
+  const rows: RowType[] = []
   for (let i = 1; i < data.length; i++) {
-    const row: RowType = {}
-    for (let j = 0; j < translatedHeaders.length; j++) {
-      if (translatedHeaders[j] !== null) {
-        row[translatedHeaders[j]] = data[i][j]
+    const row: RowType = { amount: '', id: '', recipient: '', date: '' }
+    for (let j = 0; j < data[i].length; j++) {
+      const translatedHeader = headerTranslations[data[0][j]]
+      if (translatedHeader) {
+        row[translatedHeader] = data[i][j]
       }
     }
-    mappedRows.push(row)
+    rows.push(row)
   }
 
-  return {
-    headers: translatedHeaders.filter((header) => header !== null),
-    rows: mappedRows,
-  }
+  console.log(headers)
+  console.log(rows)
+
+  return { headers, rows }
 }
