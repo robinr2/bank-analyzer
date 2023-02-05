@@ -1,11 +1,20 @@
 $semantic-root-element: '#root';
 
 .income {
-  background-color: #43a047;
+  color: #3ada42;
 }
 
 .expenses {
-  background-color: #e53935;
+  color: #e15d5d;
+}
+
+details > ul {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+details > ul > li {
+  list-style-type: none;
 }
 
 @import '@picocss/pico/scss/pico';

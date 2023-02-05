@@ -11,25 +11,35 @@ function FileAnalysis() {
   return (
     <div>
       {Object.keys(recipientRowsByMonths).map((month) => (
-        <Fragment key={`month-${month}`}>
+        <article key={`month-${month}`}>
           <h2>
             {month}:{' '}
             <span className="income">{recipientTotalsByMonths[month].totalIncome} EUR</span>{' '}
             <span className="expenses">{recipientTotalsByMonths[month].totalExpenses} EUR</span>
           </h2>
           {Object.keys(recipientRowsByMonths[month]).map((recipient) => (
-            <Fragment key={`month-${month}&recipient-${recipient}`}>
-              <h3>
-                {recipient}: {recipientTotalsByMonths[month][recipient]} EUR
-              </h3>
-              {recipientRowsByMonths[month][recipient].map((row, rowIndex) => (
-                <p key={`month-${month}&recipient-${recipient}&row-${rowIndex}`}>
-                  {row.date}: {row.amount} EUR
-                </p>
-              ))}
-            </Fragment>
+            <details key={`month-${month}&recipient-${recipient}`}>
+              <summary>
+                {recipient}:{' '}
+                <span
+                  className={recipientTotalsByMonths[month][recipient] < 0 ? 'expenses' : 'income'}
+                >
+                  {recipientTotalsByMonths[month][recipient]} EUR
+                </span>
+              </summary>
+              <ul className="mb-0">
+                {recipientRowsByMonths[month][recipient].map((row, rowIndex) => (
+                  <li key={`month-${month}&recipient-${recipient}&row-${rowIndex}`}>
+                    {row.date}:{' '}
+                    <span className={+row.amount.replace(',', '.') < 0 ? 'expenses' : 'income'}>
+                      {row.amount} EUR
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </details>
           ))}
-        </Fragment>
+        </article>
       ))}
     </div>
   )
