@@ -1,8 +1,8 @@
-type HeaderTranslationsType = 'recipient' | 'amount' | 'date' | 'id'
+export type HeaderType = 'recipient' | 'amount' | 'date' | 'id'
 
-export type RowType = Record<HeaderTranslationsType, string>
+export type RowType = Record<HeaderType, string>
 
-const headerTranslations: Record<string, HeaderTranslationsType> = {
+const headerTranslations: Record<string, HeaderType> = {
   'Beguenstigter/Zahlungspflichtiger': 'recipient',
   Betrag: 'amount',
   Buchungstag: 'date',
@@ -16,7 +16,7 @@ const getDataFromCSVString = (csvString: string) => {
 export const parseCSV = async (file: File) => {
   const csvString = await file.text()
   const data = getDataFromCSVString(csvString)
-  const headers = data[0].reduce((acc: string[], header) => {
+  const headers = data[0].reduce((acc: HeaderType[], header) => {
     return headerTranslations[header] ? [headerTranslations[header], ...acc] : acc
   }, [])
 
@@ -31,9 +31,6 @@ export const parseCSV = async (file: File) => {
     }
     rows.push(row)
   }
-
-  console.log(headers)
-  console.log(rows)
 
   return { headers, rows }
 }

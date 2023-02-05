@@ -1,9 +1,9 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react'
-import { RowType } from '../utils/parseCSV'
+import { HeaderType, RowType } from '../utils/parseCSV'
 
 type CSVDataContextType = {
-  headers: string[]
-  setHeaders: Dispatch<SetStateAction<string[]>>
+  headers: HeaderType[]
+  setHeaders: Dispatch<SetStateAction<HeaderType[]>>
   rows: RowType[]
   setRows: Dispatch<SetStateAction<RowType[]>>
 }
@@ -15,7 +15,7 @@ type CSVDataContextProviderProps = {
 }
 
 export function CSVDataContextProvider({ children }: CSVDataContextProviderProps) {
-  const [headers, setHeaders] = useState<string[]>([])
+  const [headers, setHeaders] = useState<HeaderType[]>([])
   const [rows, setRows] = useState<RowType[]>([])
 
   return (
