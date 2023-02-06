@@ -31,9 +31,7 @@ function FileAnalysis() {
                 {recipientRowsByMonths[month][recipient].map((row, rowIndex) => (
                   <li key={`month-${month}&recipient-${recipient}&row-${rowIndex}`}>
                     {row.date}:{' '}
-                    <span className={+row.amount.replace(',', '.') < 0 ? 'expenses' : 'income'}>
-                      {row.amount} EUR
-                    </span>
+                    <span className={row.amount < 0 ? 'expenses' : 'income'}>{row.amount} EUR</span>
                   </li>
                 ))}
               </ul>

@@ -1,6 +1,11 @@
-export type HeaderType = 'recipient' | 'amount' | 'date' | 'id'
+export type RowType = {
+  recipient: string
+  amount: number
+  date: string
+  id: string
+}
 
-export type RowType = Record<HeaderType, string>
+export type HeaderType = keyof RowType
 
 const headerTranslations: Record<string, HeaderType> = {
   'Beguenstigter/Zahlungspflichtiger': 'recipient',
@@ -22,9 +27,13 @@ export const parseCSV = async (file: File) => {
 
   const rows: RowType[] = []
   for (let i = 1; i < data.length; i++) {
-    const row: RowType = { amount: '', id: '', recipient: '', date: '' }
+    const row: RowType = { amount: 0, id: '', recipient: '', date: '' }
     for (let j = 0; j < data[i].length; j++) {
       const translatedHeader = headerTranslations[data[0][j]]
+      if (translatedHeader === 'amount') {
+        row['amount'] = +data[i][j].replace(',', '.')
+        continue
+      }
       if (translatedHeader) {
         row[translatedHeader] = data[i][j]
       }

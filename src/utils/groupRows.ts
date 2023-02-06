@@ -77,7 +77,7 @@ export const groupRecipientTotalsByMonths = (rows: RowType[]) => {
       recipientTotals[recipient] = 0
       for (const row of rows) {
         if (rowMatchesMonthAndRecipient(row, month, recipient)) {
-          const amount = +row.amount.replace(',', '.')
+          const amount = row.amount
           recipientTotals[recipient] += amount
           if (amount < 0) {
             recipientTotals.totalExpenses += amount
