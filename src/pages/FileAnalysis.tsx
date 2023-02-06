@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useCSVDataContext } from '../context/CSVDataContext'
 import { groupRecipientRowsByMonths, groupRecipientTotalsByMonths } from '../utils/groupRows'
 

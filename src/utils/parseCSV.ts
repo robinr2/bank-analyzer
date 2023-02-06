@@ -1,8 +1,15 @@
+const HEADER = {
+  RECIPIENT: 'recipient',
+  AMOUNT: 'amount',
+  DATE: 'date',
+  ID: 'id',
+} as const
+
 export type RowType = {
-  recipient: string
-  amount: number
-  date: string
-  id: string
+  [HEADER.RECIPIENT]: string
+  [HEADER.AMOUNT]: number
+  [HEADER.DATE]: string
+  [HEADER.ID]: string
 }
 
 export type HeaderType = keyof RowType
@@ -30,8 +37,8 @@ export const parseCSV = async (file: File) => {
     const row: RowType = { amount: 0, id: '', recipient: '', date: '' }
     for (let j = 0; j < data[i].length; j++) {
       const translatedHeader = headerTranslations[data[0][j]]
-      if (translatedHeader === 'amount') {
-        row['amount'] = +data[i][j].replace(',', '.')
+      if (translatedHeader === HEADER.AMOUNT) {
+        row[HEADER.AMOUNT] = +data[i][j].replace(',', '.')
         continue
       }
       if (translatedHeader) {
