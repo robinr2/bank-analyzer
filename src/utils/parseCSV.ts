@@ -37,12 +37,18 @@ export const parseCSV = async (file: File) => {
     const row: RowType = { amount: 0, id: '', recipient: '', date: '' }
     for (let j = 0; j < data[i].length; j++) {
       const translatedHeader = headerTranslations[data[0][j]]
-      if (translatedHeader === HEADER.AMOUNT) {
-        row[HEADER.AMOUNT] = +data[i][j].replace(',', '.')
-        continue
-      }
-      if (translatedHeader) {
-        row[translatedHeader] = data[i][j]
+      if (!translatedHeader) continue
+      switch (translatedHeader) {
+        case HEADER.AMOUNT:
+          row[HEADER.AMOUNT] = +data[i][j].replace(',', '.')
+          break
+        // case HEADER.DATE:
+        //   const [day, month, year] = data[i][j].split('.')
+        //   const date = new Date(+year, +month - 1, +day).toLocaleDateString()
+        //   row[HEADER.DATE] = date
+        //   break
+        default:
+          row[translatedHeader] = data[i][j]
       }
     }
     rows.push(row)
