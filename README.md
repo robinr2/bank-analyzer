@@ -1,4 +1,8 @@
-## Project Setup
+### Description
+A simple tool to analyze the expenses of your bank account.
+Can be used with CSV-files exported from your bank.
+
+### Project Setup
 
 ```sh
 npm i
